@@ -15,27 +15,20 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   navLink: {
-	  marginLeft: 15,
+	  marginLeft: 20,
 	  marginRight: 20
   }
 };
 
-function ButtonAppBar(props) {
+function TopAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" color="inherit" className={classes.navLink}>
-            Home
+            Brent Waters
           </Typography>
 		   <Typography variant="h6" color="inherit" className={classes.navLink}>
             Projects
@@ -46,8 +39,8 @@ function ButtonAppBar(props) {
   );
 }
 
-ButtonAppBar.propTypes = {
+TopAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(TopAppBar);

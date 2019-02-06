@@ -4,18 +4,22 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import hackerImage from '../res/img/hackerimage.jpg'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+	 backgroundImage: 'url(' + hackerImage + ')'
   },
- 
+  bio:{
+	color: 'white'  
+  },
   control: {
     padding: theme.spacing.unit * 2,
   },
 });
 
-class GuttersGrid extends React.Component {
+class MainContentGrid extends React.Component {
   state = {
     spacing: '16',
   };
@@ -31,27 +35,27 @@ class GuttersGrid extends React.Component {
     const { spacing } = this.state;
 
     return (
-      <Grid container className={classes.root} spacing={16}>
-        <Grid item xs={12}>
-			<Paper elevation={1}>
-				<Typography variant="h5" component="h3">
-				This is a sheet of paper.
+      <Grid container className={classes.root} spacing={0} alignItems="center" justify="center">
+
+        <Grid item xs={6} style={{ minHeight: '70vh' }}>
+			
+				<Typography className={classes.bio} variant="h5" component="h3">
+				Welcome to Dev Waters
 					</Typography>
-					<Typography component="p">
-					Paper can be used to build surface or other elements for your application.
+					<Typography className={classes.bio} component="p">
+					My name is Brent and I am a Software Developer
 				</Typography>
-			</Paper>
+		
         </Grid>
-        <Grid item xs={12}>
-        
-        </Grid>
+		
       </Grid>
+	  
     );
   }
 }
 
-GuttersGrid.propTypes = {
+MainContentGrid.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(GuttersGrid);
+export default withStyles(styles)(MainContentGrid);
