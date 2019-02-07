@@ -1,8 +1,8 @@
 import React from "react";
-
+import txt from '../res/articles/article_1.txt';
 const Articles = () => (
 	 <div>
-        This is the articles page.
+	 {txt}
       </div>
 )
 export default Articles

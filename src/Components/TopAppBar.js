@@ -29,7 +29,7 @@ const styles = {
 };
 
 const AboutLink = props => <RouterLink to="/About" {...props} />
-const ProjectsLink = props => <RouterLink to="/Projects" {...props} />
+const PortfolioLink = props => <RouterLink to="/Portfolio" {...props} />
 const ArticleLink = props => <RouterLink to="/Articles" {...props} />
 
 function TopAppBar(props) {
@@ -41,8 +41,8 @@ function TopAppBar(props) {
           <Link component={AboutLink}variant="h6" color="inherit" className={classes.navLink}>
             About
           </Link>
-		   <Link component={ProjectsLink} variant="h6" color="inherit" className={classes.navLink}>
-            Projects
+		   <Link component={PortfolioLink} variant="h6" color="inherit" className={classes.navLink}>
+            Portfolio
           </Link>
 		  <Link component={ArticleLink} variant="h6" color="inherit" className={classes.grow}>
             Articles

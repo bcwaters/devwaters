@@ -22,7 +22,12 @@ module.exports = {
 	   { 
       test: /\.svg$/, 
       loader: 'xml-loader' 
- } 
+	},
+      {
+        test: /\.txt$/,
+        use: 'raw-loader'
+      }
+ 	
     ]
   },
   resolve: {

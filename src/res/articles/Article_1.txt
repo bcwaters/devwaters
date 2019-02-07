@@ -1,0 +1,18 @@
+Title:
+How and Why I Added an Articles Tab?
+
+Section 1:
+Why?
+
+Intro:
+When it comes to programming I like to experiment.  Sometimes I enjoy re-inventing the wheel. Other times I pick up a new framework to exercise my skills. I have countless unfinished projects. Every attempt expands my knowledge. However this becomes a pitfall. What good is learning if I never apply my knowlegde to something practical?
+
+Body:
+I've been thinking about how to put all my unfinished work to use.  It is a bad habit to never finish anything but experimentation is at the core of my learning process.  So I've decided that documenting the process can extract something useful out of each project. Perhaps an article I write can be of use for someone else later on down the road. And as an added bonus I've get to instill the good habit of completing something along side each experiment.
+
+
+Section 2:
+How?
+What better way to start off my article series than to share how I format my articles? Up until this point I have written all of this in a text editor. How will I create a tool that recieves text and outputs it in pretty format?
+
+
