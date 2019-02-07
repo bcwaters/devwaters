@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -14,12 +15,22 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
+	  marginLeft: 20,
+	  marginRight: 20
   },
   navLink: {
 	  marginLeft: 20,
 	  marginRight: 20
-  }
+  }, 
+   menuButton: {
+    marginLeft: 20,
+    marginRight: 20,
+  },
 };
+
+const AboutLink = props => <RouterLink to="/About" {...props} />
+const ProjectsLink = props => <RouterLink to="/Projects" {...props} />
+const ArticleLink = props => <RouterLink to="/Articles" {...props} />
 
 function TopAppBar(props) {
   const { classes } = props;
@@ -27,12 +38,16 @@ function TopAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.navLink}>
-            Brent Waters
-          </Typography>
-		   <Typography variant="h6" color="inherit" className={classes.navLink}>
+          <Link component={AboutLink}variant="h6" color="inherit" className={classes.navLink}>
+            About
+          </Link>
+		   <Link component={ProjectsLink} variant="h6" color="inherit" className={classes.navLink}>
             Projects
-          </Typography>
+          </Link>
+		  <Link component={ArticleLink} variant="h6" color="inherit" className={classes.grow}>
+            Articles
+          </Link>
+		  <Button color="inherit">Client Login</Button>
         </Toolbar>
       </AppBar>
     </div>

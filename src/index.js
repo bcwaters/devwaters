@@ -1,21 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppBar from './Components/TopAppBar.js'
-import BottomAppBar from './Components/BottomAppBar.js'
-import MainContentGrid from './Components/MainContentGrid.js'
 
-const title = 'My ael Setup';
-const website = (
-	<div>
-		<AppBar/> 
-		<MainContentGrid />
-		<BottomAppBar />
-	</div>
+import { BrowserRouter as Router } from 'react-router-dom'
+import App from './App.js'
 
-)
-
+//TODO need to set up custom express routes ... possible us nextjs
 ReactDOM.render(
-	website,
+	<Router>
+		<App />
+	</Router>,
 	document.getElementById('app')
 );
 
