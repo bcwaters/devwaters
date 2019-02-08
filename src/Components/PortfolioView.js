@@ -3,7 +3,7 @@ export default class Projects extends Component {
   render() {
     return (
       <div id="Projects">
-        This is the project me page.
+        TODO add image grid of 4 projects
       </div>
     );
   }

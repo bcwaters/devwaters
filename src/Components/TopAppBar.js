@@ -39,7 +39,7 @@ function TopAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Link component={AboutLink}variant="h6" color="inherit" className={classes.navLink}>
-            About
+            Home
           </Link>
 		   <Link component={PortfolioLink} variant="h6" color="inherit" className={classes.navLink}>
             Portfolio
