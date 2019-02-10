@@ -55,13 +55,13 @@ class MainContentGrid extends React.Component {
     return (
       <Grid container className={classes.root} >
 		<Grid item className={classes.skyTextContainer}  xs={12} 
-		style={{ minHeight: '20vh' }} >		
+		style={{ minHeight: '30vh' }} >		
 		 &nbsp; &nbsp;
 			<Typography className={classes.HomeText} variant="h3" component="h2" align="center" >
 				Dev Waters
 			</Typography>
         </Grid>
-		<Grid item className={classes.waterTextContainer} xs={12} style={{ minHeight: '30vh' }} >
+		<Grid item className={classes.waterTextContainer} xs={12} style={{ minHeight: '50vh' }} >
 			&nbsp; 	&nbsp; 	&nbsp;	&nbsp;
 			<Typography className={classes.HomeText} variant="h5" component="h2" align="center">
 			 Software Solutions	<br/>

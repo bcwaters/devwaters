@@ -1,0 +1,9 @@
+set up haraka email server
+
+
+GOTCHAS
+haraka command not working... it might simply be because you used npm install haraka instead of npm install Haraka.
+UPPERCASE matters.
+
+
+test_queue not working... that's because it was moved to queue/test
