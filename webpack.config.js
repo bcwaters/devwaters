@@ -42,6 +42,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: './dist'
+    	host: '0.0.0.0',
+	disableHostCheck: true,
+	contentBase: './dist'
   }
 };
