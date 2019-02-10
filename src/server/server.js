@@ -1,19 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const chokidar = require('chokidar');
-
+const util = require('util')
 const app = express();
 const port = process.env.PORT || 8080;
 
-var watcher = chokidar.watch('./emails/', {ignored: /^\./, persistent: true});
-
-watcher
-  .on('add', function(path) {console.log('File', path, 'has been added');})
-  .on('change', function(path) {console.log('File', path, 'has been changed');})
-  .on('unlink', function(path) {console.log('File', path, 'has been removed');})
-  .on('error', function(error) {console.error('Error happened', error);})
-  
-  
+var watcher = chokidar.watch(__dirname+'/emails', {ignoreInitial:true, ignored: /[\/\\]\./})
+watcher.on('all', (event, path) => {
+  console.log(event, path);
+});
+console.log('watcher made' )
+var testObj = {test:'test'}
+var dirList = watcher.getWatched();
+console.log(__dirname)
+console.log(util.inspect(testObj, {showHidden: false, depth: null}))
+console.log('direcotry watched is: '+ util.inspect(dirList) )
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
