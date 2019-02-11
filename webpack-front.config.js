@@ -37,13 +37,5 @@ module.exports = {
     path: __dirname + '/dist',
     publicPath: '/',
     filename: 'bundle-front.js'
-  },
-   plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    	host: '0.0.0.0',
-	disableHostCheck: true,
-	contentBase: './dist'
   }
 };

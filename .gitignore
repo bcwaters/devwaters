@@ -1,3 +1,6 @@
+#bracket config
+.brackets.json
+
 #project specific directories
 dist
 src/server/emails/*
