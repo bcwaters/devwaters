@@ -8,7 +8,7 @@ import { StaticRouter } from 'react-router'
 const bodyParser = require('body-parser');
 const chokidar = require('chokidar');
 console.log('my path is:' + path.resolve(__dirname))
-var watcher = chokidar.watch(__dirname+'/emails', {ignoreInitial:true, ignored: /[\/\\]\./})
+var watcher = chokidar.watch(__dirname+'/tmp/emails/', {ignoreInitial:true, ignored: /[\/\\]\./})
 watcher.on('all', (event, path) => {
   console.log(event, path);
 });
