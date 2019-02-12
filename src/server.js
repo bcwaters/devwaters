@@ -7,6 +7,8 @@ const PORT = 8080
 const app = express()
 const EmailWatcher = new FileWatcher()
 
+
+
 const router = express.Router()
 
 //route for main app
@@ -18,9 +20,6 @@ router.use('/tempEmail', tempEmailRenderer)
 router.use(
   express.static('dist', { maxAge: '30d' })
 )
-
-
-
 
 //If no route exist reroute to homepage
 router.get('*', function(req, res) {
@@ -36,9 +35,8 @@ const io = require('socket.io')(server);
 io.on('connection', () => { console.log('socketConnected') });
 server.listen(3000);
 
-
 //set filewatch to emit stuff
-EmailWatcher.onNewEmail((io) => {io.emit('email', 'test' )}, io)
+EmailWatcher.onNewEmail((io, data) => {io.emit('email', { email: data } )}, io)
 
 app.listen(PORT, () => {
   console.log(`SSR running on port ${PORT}`)

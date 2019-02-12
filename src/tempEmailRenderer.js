@@ -5,7 +5,7 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 
 import App from './tempEmailClient/App.js'
-
+//TODO add socket URL prop to App 
 const serverRenderer = (req, res, next) => {
   const context = {}
   fs.readFile(path.resolve('./dist/tempEmail.html'), 'utf8', (err, data) => {

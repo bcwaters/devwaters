@@ -33,9 +33,9 @@ class EmailContentGrid extends React.Component {
         this.props.registerHandler(this.onEmailReceived)
     }
     
-    onEmailReceived(){
-        console.log('new email')
-        this.setState({currentEmail: 'new email!'})
+    onEmailReceived(data){
+        console.log(data)
+        this.setState({currentEmail: data.email})
     }
     
 	render() {
