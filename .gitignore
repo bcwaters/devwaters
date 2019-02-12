@@ -2,7 +2,8 @@
 .brackets.json
 
 #project specific directories
-dist
+dist/*
+!dist/*.html
 src/server/emails/*
 
 # Logs
