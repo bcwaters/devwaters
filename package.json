@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production --config ./webpack-back.config.js && webpack --mode production --config webpack-front.config.js",
+    "build": "webpack --mode production --config ./webpack-back.config.js && webpack --mode production --config webpack-front.config.js && webpack --mode production --config ./webpack-email.config.js",
     "run-production": "npm run build && node dist/bundle-back.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +37,8 @@
     "react-dom": "^16.7.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "webpack-node-externals": "^1.7.2"
   }
 }

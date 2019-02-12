@@ -16,6 +16,4 @@ function Main(){
   </Switch>
  </main>
 )} 
-export default ( Main
-
-);
+export default ( Main);
