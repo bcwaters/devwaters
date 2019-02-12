@@ -1,5 +1,6 @@
 import chokidar from 'chokidar'
 import fs from 'fs'
+const simpleParser = require("mailparser").simpleParser;
 
 class EmailWatcher{
     
@@ -21,6 +22,9 @@ class EmailWatcher{
             fs.readFile(path,{encoding: 'utf-8'}, function(err,data){
                 if (!err) {
                     console.log('received data: ' + data);
+                    simpleParser(data)
+                .then(parsed => {console.log(parsed.text)})
+                .catch(err => {console.log('couldnt parse')});
                     doThis(io, data);
                 }else{
                     console.log(err);
