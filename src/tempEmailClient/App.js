@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import EmailContentGrid from './components/EmailContentGrid.js'
+import EmailContentGrid from './components/EmailViewer.js'
 import socket from './socket';
 
 export default class App extends Component {
@@ -13,7 +13,6 @@ export default class App extends Component {
   render() {
     return (
       <div>
-	       current email is {this.state.currentEmail}
             <EmailContentGrid registerHandler={(handler) => this.state.client.registerHandler(handler)}/>
       </div>
     );
