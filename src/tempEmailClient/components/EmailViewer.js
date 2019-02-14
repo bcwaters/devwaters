@@ -18,8 +18,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import InboxSidebar from './InboxSidebar.js'
 
-const drawerWidth = 240;
+
+const drawerWidth = 280;
 
 const styles = theme => ({
   root: {
@@ -89,6 +91,7 @@ class EmailViewer extends React.Component {
             super(props, context)
 
     this.onEmailReceived = this.onEmailReceived.bind(this)
+    this.updateCurrentEmail = this.updateCurrentEmail.bind(this)
     
   }
 
@@ -102,19 +105,17 @@ class EmailViewer extends React.Component {
         this.addMessage( data.email)
     }
 
+  updateCurrentEmail(currentEmail){
+      this.setState({currentEmail: currentEmail})
+  }
+
   addMessage(msg){
       this.setState({
             emailsReceived: [...this.state.emailsReceived, msg]
         })
   }
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+ 
 
   render() {
     const { classes, theme } = this.props;
@@ -148,23 +149,11 @@ class EmailViewer extends React.Component {
             Inbox
           </div>
           <Divider />
-         
-            <List>{ 
-              this.state.emailsReceived.length ==0 ?  
-                <ListItem><ListItemText primary='no emails received'/></ListItem>
-              :
-                this.state.emailsReceived.map((text, index) => (
-                <ListItem button key={index} 
-                                onClick={
-                                ()=>{this.setState({currentEmail: text})}
-                                }>
-                    <ListItemIcon> <InboxIcon /> </ListItemIcon>
-                    <ListItemText primary={'Email #: ' + (index+1)} />
-                </ListItem>
-            ))}
-            </List>
+            <InboxSidebar 
+                emailsReceived={this.state.emailsReceived} 
+                parentCallback={this.updateCurrentEmail} 
+            />
           <Divider />
-         
         </Drawer>
         <main
           className={classNames(classes.content, {
