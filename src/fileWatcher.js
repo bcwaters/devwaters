@@ -18,14 +18,14 @@ class EmailWatcher{
         //change event is called when new file is written
         this.watcher.on('all', (event, path) => {
         console.log('file path:' + path + 'event: ' + event)
-        if(event == 'change'){
+        if(event == 'add'){
             fs.readFile(path,{encoding: 'utf-8'}, function(err,data){
                 if (!err) {
-                    console.log('received data: ' + data);
-                    simpleParser(data)
-                .then(parsed => {console.log(parsed.text)})
+                 simpleParser(data)
+                .then(parsed => {	console.log(parsed.text)
+					doThis(io, parsed.text)})
                 .catch(err => {console.log('couldnt parse')});
-                    doThis(io, data);
+                   // doThis(io, data);
                 }else{
                     console.log(err);
                 }
