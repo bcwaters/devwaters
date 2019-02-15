@@ -12,18 +12,19 @@ class EmailWatcher{
                      awaitWriteFinish:true })
 
   }
-    //Not sure  why i have to include io in here... fix this
+    //server.js provides socket behavior to this method
     onNewEmail(emitEmailEvent, SocketServer){
-        //change event is called when new file is written
+        //Linking socket to server file directory
         this.watcher.on('all', (event, path) => {
+            //for windows change event is called when new file is written
             if(event == 'change'){
                 fs.readFile(path,{encoding: 'utf-8'}, 
                     function(err,data){
-                    if (!err) {
-                            simpleParser(data)
-                            .then(parsedData => {
-                               
-                                 emitEmailEvent(SocketServer, parsedData);  
+                    if (!err) { //parse raw email into mailobject.
+                                simpleParser(data)
+                                .then(mailObject => {
+                                //emit mail object with socket server
+                                emitEmailEvent(SocketServer, mailObject);  
                             })
                                 .catch(
                                 err => {console.log('couldnt parse sneding raw data')

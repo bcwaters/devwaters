@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App.js'
 
-//TODO need to set up custom express routes ... possible us nextjs
-//TODO add readme for github and a TODO doc
+//This is rendered server side so hyrdate connects client DOM to server DOM
 ReactDOM.hydrate(
 	<Router>
 		<App />

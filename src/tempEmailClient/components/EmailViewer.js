@@ -20,9 +20,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import InboxSidebar from './InboxSidebar.js'
 
-
 const drawerWidth = 280;
-
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -81,10 +79,10 @@ const styles = theme => ({
 });
 
 class EmailViewer extends React.Component {
-  state = {
-    open: true,
-    emailsReceived: [],
-    currentEmail: 'click an email to view'
+    
+    state = {
+    emailsReceived: [],  //array of mailobjects
+    currentEmail: {text: 'click an email to view'} //current mailObject
   };
 
   constructor(props, context) {
@@ -92,24 +90,30 @@ class EmailViewer extends React.Component {
 
     this.onEmailReceived = this.onEmailReceived.bind(this)
     this.updateCurrentEmail = this.updateCurrentEmail.bind(this)
+    this.deleteEmail = this.deleteEmail.bind(this)
     
   }
 
- componentDidMount() {
-        console.log('componenet mounted')
-        this.props.registerHandler(this.onEmailReceived)
+  componentDidMount() {
+      //this directs the socket data to a component function
+      this.props.registerHandler(this.onEmailReceived)
     }
 
-    //TODO this syntax could match other methods
-  onEmailReceived(data){
-        this.addMessage( data.email)
+  //triggered when socket notifies of a new email
+  onEmailReceived(socketData){    
+      this.addMessageToView( socketData.email)
     }
 
   updateCurrentEmail(currentEmail){
       this.setState({currentEmail: currentEmail})
   }
 
-  addMessage(msg){
+  deleteEmail(index){
+      this.setState({currentEmail: 'click an email to view',
+                     emailsRecieved: this.state.emailsReceived.splice(index,1)})
+  }
+
+  addMessageToView(msg){
       this.setState({
             emailsReceived: [...this.state.emailsReceived, msg]
         })
@@ -119,18 +123,17 @@ class EmailViewer extends React.Component {
 
   render() {
     const { classes, theme } = this.props;
-    const { open } = this.state;
-
+  
     return (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: true,
           })}
         >
-          <Toolbar disableGutters={!open}>
+          <Toolbar disableGutters={false}>
             <Typography variant="h6" color="inherit" noWrap>
               Temp Email Viewer
             </Typography>
@@ -140,7 +143,7 @@ class EmailViewer extends React.Component {
           className={classes.drawer}
           variant="persistent"
           anchor="left"
-          open={open}
+          open={true}
           classes={{
             paper: classes.drawerPaper,
           }}
@@ -151,18 +154,19 @@ class EmailViewer extends React.Component {
           <Divider />
             <InboxSidebar 
                 emailsReceived={this.state.emailsReceived} 
-                parentCallback={this.updateCurrentEmail} 
+                setEmailToView={this.updateCurrentEmail} 
+                deleteEmail={this.deleteEmail}
             />
           <Divider />
         </Drawer>
         <main
           className={classNames(classes.content, {
-            [classes.contentShift]: open,
+            [classes.contentShift]: true,
           })}
         >
           <div className={classes.drawerHeader} />
           <Typography paragraph>
-              {this.state.currentEmail} 
+              {this.state.currentEmail.text} 
           </Typography>
          
         </main>

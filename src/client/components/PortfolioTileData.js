@@ -5,6 +5,7 @@ import image from '../res/img/sky.png'
 		img: image,
 		title: 'SMTP email forwarding',
 		author: 'Haraka',
+        href: 'http://devwaters.com/tempEmail'
     }
   ];
   

@@ -44,7 +44,7 @@ class TitlebarGridList extends React.Component {
 					title={tile.title}
 					subtitle={<span>library: {tile.author}</span>}
 					actionIcon={
-						<IconButton className={classes.icon}>
+						<IconButton href={tile.href} className={classes.icon}>
 							<InfoIcon />
 						</IconButton>
 					}
