@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import EmailView from './components/EmailViewer.js'
+import EmailView from './components/EmailView.js'
 import socket from './socket';
 
 export default class App extends Component {
@@ -14,9 +14,9 @@ export default class App extends Component {
     
   render() {
     return (
-      <div>
+      <React.Fragment>
         <EmailView registerHandler={(handleEmailFunction) => this.state.clientsideSocket.registerNewEmailHandler(handleEmailFunction)}/>
-      </div>
+      </React.Fragment>
     );
   }
 }
