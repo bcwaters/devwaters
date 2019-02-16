@@ -10,36 +10,36 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
 
-const drawerWidth = 270;
-const drawerMaxWidth = '40%';
 const styles = theme => ({
     fromText: {
         flex:'1 1 auto', 
         padding: '0px', 
         minWidth:'0px'},
-
+    listBorder:{
+        borderWidth: '1px 0px 1px 1px',
+        borderStyle: 'solid',
+        height: '50vh',
+        padding: '0px',
+    },
     inboxIcon:{
         color:'gold',
         '&:hover': { color: 'DarkGoldenRod'}},
     deleteIcon:{
         color: 'DarkRed',
         '&:hover': { color: 'red'}},
-    drawer: {
-        width: drawerWidth,
-        maxWidth: drawerMaxWidth,
-        flexShrink: 0},
-    drawerPaper: {
-        width: drawerWidth,
-        maxWidth: drawerMaxWidth,},
-    drawerHeader: {
+    fillAppBarSpace: {
         display: 'flex',
         alignItems: 'center',
-        padding: '0 8px',
+        padding: '0px',
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
   },
+      emailText:{
+        textOverflow: 'clip',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden'
+    }
 });
 
 class InboxSidebar extends React.Component {
@@ -52,31 +52,30 @@ class InboxSidebar extends React.Component {
     //TODO update the css for the from field
 	return (
         <React.Fragment>
-        <Drawer
-          className={classes.drawer}
-          variant="permanent"
-          anchor="left"
-          open={true}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            Inbox
-          </div>
-          <Divider />
-		  <List>{ 
-              this.props.emailsReceived.length ==0 ?  
+            <div className={classes.fillAppBarSpace}/>
+            <div className={classes.fillAppBarSpace}> 
+                'Send an email to test@devwaters.com for your viewing pleasure.'
+            </div>
+            <div className={classes.fillAppBarSpace}/>
+      
+		  <List className={classes.listBorder}>
+                 <ListItem style={{ borderWidth: '0px 0px 1px 0px', 
+                                    borderStyle: 'solid'}}>
+                    <ListItemText primary='Inbox'/>
+                </ListItem>
+            {  this.props.emailsReceived.length ==0 ?  
                 <ListItem><ListItemText primary='no emails received'/></ListItem>
               :
                 this.props.emailsReceived.map((mailObject, index) => (
                 <ListItem button key={index} 
                     onClick={()=>this.props.setEmailToView(mailObject)}>
-                <ListItemIcon > <InboxIcon className={classes.inboxIcon} /> 
-                </ListItemIcon>
                  <CssBaseline />
                 <ListItemText
-                    style={{flex:'1 1 auto', padding: '0px', minWidth:'0px'}}
+                    style={{flex:'1 1 auto', padding: '0px', minWidth:'0px', 
+                            textOverflow: 'clip',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden'
+                            }}
                     primary={mailObject.from.value[0].name}
                     secondary={ mailObject.from.value[0].address} />
                 
@@ -95,8 +94,7 @@ class InboxSidebar extends React.Component {
                 </ListItem>
             ))}
             </List>
-        <Divider />
-        </Drawer>
+      
         </React.Fragment>
         );
 	}

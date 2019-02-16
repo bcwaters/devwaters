@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --mode production --config ./webpack-back.config.js && webpack --mode production --config webpack-front.config.js && webpack --mode production --config ./webpack-email.config.js",
     "run-production": "npm run build && node dist/bundle-back.js",
+    "run-tempEmail" : "webpack --mode production --config ./webpack-email.config.js && node dist/bundle-back.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

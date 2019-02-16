@@ -10,8 +10,10 @@ const styles = theme => ({
    appBar: {
         zIndex: theme.zIndex.drawer + 1,
         },
+    root: {
+           flexGrow: '1',
+    }
 });
-
 
 
 class TopAppBar extends React.Component {
@@ -21,8 +23,8 @@ class TopAppBar extends React.Component {
 	const { classes } = this.props;
 
 	return (
-            <React.Fragment>
-            <AppBar position="fixed"
+            
+            <AppBar 
                     className={classes.appBar}
             >
                 <Toolbar disableGutters={false}>
@@ -31,7 +33,7 @@ class TopAppBar extends React.Component {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            </React.Fragment>
+            
         
         );
 	}

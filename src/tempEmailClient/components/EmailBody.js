@@ -10,29 +10,22 @@ const styles = theme => ({
   root: {
     display: 'flex',
   },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
+  fillAppBarSpace : theme.mixins.toolbar,
   content: {
+    whiteSpace:'pre',
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
     marginLeft: 0,
   },
+    emailContainer: {
+         borderWidth: '1px',
+        borderStyle: 'solid',
+        height: '50vh',
+    },
+    fromField: {
+        ...theme.mixins.listItemText,
+        borderWidth: '0px 0px 1px 0px',
+        borderStyle: 'solid'
+    }
 });
 
 class EmailBody extends React.Component {
@@ -42,19 +35,23 @@ class EmailBody extends React.Component {
 	const { classes } = this.props;
 
 	return (
-        <main
-          className={classNames(classes.content, {
-            [classes.contentShift]: true,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-            <Typography paragraph>
-              {'From: ' + this.props.currentEmail.from.text} 
-            </Typography>
-            <Typography paragraph>
-              {this.props.currentEmail.text} 
-            </Typography>
-         
+        <main className={classes.content}>
+            <div className={classes.fillAppBarSpace} />
+            <div className={classes.fillAppBarSpace} />
+            <div className={classes.fillAppBarSpace} />
+            <div className={classes.emailContainer}>
+                <div className={classes.fromField} >
+                    <Typography noWrap={true} variant='h6'>
+                        {'From: ' + this.props.currentEmail.from.text} 
+                    </Typography>
+                    <Typography noWrap={true} variant='subtitle2'>
+                        {'Subject: ' + this.props.currentEmail.from.text} 
+                    </Typography>
+                </div>
+                <Typography paragraph>
+                {this.props.currentEmail.text} 
+                </Typography>
+            </div>
         </main>
 
  );

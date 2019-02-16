@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import InboxSidebar from './InboxSidebar.js'
 import TopAppBar from './TopAppBar.js'
 import EmailBody from './EmailBody.js'
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
+    root: {
+        display: 'flex',
+    },
+    gridContainer: {
+    flexGrow: 1 ,
   },
+    readContainer: {
+        height: '400px,'
+    },
+    fillAppBarSpace: theme.mixins.toolbar,
 });
 
 const defaultNotice = {
@@ -25,11 +33,12 @@ class EmailViewer extends React.Component {
   };
 
   constructor(props, context) {
-            super(props, context)
-
-    this.onEmailReceived = this.onEmailReceived.bind(this)
-    this.updateCurrentEmail = this.updateCurrentEmail.bind(this)
-    this.deleteEmail = this.deleteEmail.bind(this)
+        super(props, context)
+        
+        this.ContainerRef = React.createRef();
+        this.onEmailReceived = this.onEmailReceived.bind(this)
+        this.updateCurrentEmail = this.updateCurrentEmail.bind(this)
+        this.deleteEmail = this.deleteEmail.bind(this)
     
   }
 
@@ -65,14 +74,23 @@ class EmailViewer extends React.Component {
       <div className={classes.root}>
         <CssBaseline />
         <TopAppBar />
-        <InboxSidebar 
-            emailsReceived={this.state.emailsReceived} 
-            setEmailToView={this.updateCurrentEmail} 
-            deleteEmail={this.deleteEmail}
-        /> 
-        <EmailBody
-            currentEmail={this.state.currentEmail}
-        />
+        <Grid container className={classes.gridContainer}>
+            <Grid item xs={2} />
+            <Grid item xs={2} >
+            <InboxSidebar
+                container={this.containerRef}
+                emailsReceived={this.state.emailsReceived} 
+                setEmailToView={this.updateCurrentEmail} 
+                deleteEmail={this.deleteEmail}
+             
+            /> 
+            </Grid>
+            <Grid item xs={6}>
+            <EmailBody
+                currentEmail={this.state.currentEmail}
+            />
+            </Grid>
+        </Grid>
       </div>
     );
   }
