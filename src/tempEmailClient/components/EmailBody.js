@@ -21,9 +21,9 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        minHeight: '50vh',
+        minHeight: '70vh',
         maxWidth: '100%',
-        marginRight: '10px',
+        marginRight: '3px',
         overflow: 'auto'
     },
     htmlContent: {
@@ -61,7 +61,7 @@ class EmailBody extends React.Component {
                             style= {{
                                     flexGrow: '1',
                                     width:'100%',
-                                    minHeight:'50vh'}}
+                                    minHeight:'60vh'}}
                         />
                     :
                         <Typography paragraph>

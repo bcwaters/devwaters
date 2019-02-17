@@ -36,7 +36,11 @@ const styles = theme => ({
         color: 'DarkRed',
         '&:hover': { color: 'red'}},
     myAddressBox: {
-        backgroundColor: '#008000b0',
+        backgroundColor: '#00800059',
+  },
+    donationBox: {
+        marginTop: '20px',
+        backgroundColor: 'pink',
   },
       emailText:{
         textOverflow: 'clip',
@@ -107,9 +111,17 @@ class InboxSidebar extends React.Component {
                                
                 </ListItem>
             ))}
-            </List>
-      
+            </List> 
+            <div className={classes.donationBox}> 
+                <ListItem style={{ textAlign: 'right'}}>
+                    <ListItemText
+                        primary={'I will beg for donations here'}
+                        secondary={ '[donate]'} />
+                </ListItem>  
+            </div>
         </div>
+      
+     
         );
 	}
 }

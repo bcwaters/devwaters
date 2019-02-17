@@ -2,29 +2,39 @@ const Notices = {
     defaultNotice : {
             from: {value: [
                     {
-                        name: 'notice@TemporaryEmail',
-                        address: 'notice@TemporaryEmail'
+                        name: 'notification',
+                        address: 'tips@devwaters.com'
                     }],
-                   text :'notice@TemporyEmail',
+                   text :'tips@devwaters.com',
                   },
            
             subject: 'Changing your temporary email address',
-            text: 'Your current email address is test@devwaters.com\nClick the change link to create a custom one'} ,
+            text: 'Your current email address is test@devwaters.com\nClick the change link on the left to create a custom one'} ,
 
    welcomeNotice : {
             from: {value: [
                     {
-                        name: 'notice@TemporaryEmail',
-                        address: 'notice@TemporaryEmail'
+                        name: 'Welcome To Temp Mail',
+                        address: 'greeter@devwaters.com'
                     }],
-                   text :'notice@TemporyEmail',
+                   text :'greeter@devwaters.com',
                   },
            
             subject: 'Welcome',
             text: 'Use the inbox on the left to read your emails'},
-
+    supportNotice : {
+            from: {value: [
+                    {
+                        name: 'Support Temp Mail',
+                        address: 'sponsors@devwaters.com'
+                    }],
+                   text :'sponsors@devwaters.com',
+                  },
+           
+            subject: 'Support our sponsors',
+            text: 'Take a look at my affiliates to help keep temp mail free'},
     deleteNotice : {
-            from: {text :'notice@TemporyEmail'},
+            from: {text :'help@devwaters.com'},
             subject: 'Email Deleted',
             text: 'Email deleted.'}
 }

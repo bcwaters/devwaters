@@ -37,7 +37,7 @@ server.listen(3000);
 //Link socket to filewatcher event
 EmailWatcher.onNewEmail(
     //upon new email use io to emit data to client                   
-    (socketServer, newEmail) => 
+    (socketServer, mailObject) => 
     {socketServer.emit('email', { email: mailObject } )}, io)
 
 app.listen(PORT, () => {

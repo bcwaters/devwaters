@@ -16,7 +16,7 @@ const styles = theme => ({
     },
     gridContainer: {
         flexGrow: 1 ,
-        height: '90vh',
+        height: '95vh',
     },
     fillAppBarSpace: theme.mixins.toolbar,
     bannerSpace: {
@@ -24,6 +24,8 @@ const styles = theme => ({
         borderStyle: 'solid'},
     footerSpace: {
         minHeight:'11vh',
+        borderStyle: 'solid'},
+    adSpace: {
         borderStyle: 'solid'},
 });
 
@@ -53,6 +55,11 @@ class EmailViewer extends React.Component {
             this.addEmailToView(Notices.defaultNotice)
             },
                 4 * 1000
+        );
+       setTimeout(() => {
+            this.addEmailToView(Notices.supportNotice)
+            },
+                15 * 1000
         );
     }
 
@@ -85,9 +92,6 @@ class EmailViewer extends React.Component {
         <TopAppBar />
         <Grid container className={classes.gridContainer}>
             <Grid item xs={12} className={classes.fillAppBarSpace}/>
-            <Grid item xs={12} className={classes.bannerSpace}>
-            banner goes here
-            </Grid>
             <Grid item xs={2} >
             <InboxSidebar
                 container={this.containerRef}
@@ -97,10 +101,13 @@ class EmailViewer extends React.Component {
              
             /> 
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
             <EmailBody
                 currentEmail={this.state.currentEmail}
             />
+            </Grid>
+            <Grid item xs={3} className={classes.adSpace}>
+                ads go in this area
             </Grid>
             <Grid item xs={12} className={classes.footerSpace}>
             footer stuff goes here
