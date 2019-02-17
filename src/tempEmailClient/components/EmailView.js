@@ -11,19 +11,30 @@ import EmailBody from './EmailBody.js'
 const styles = theme => ({
     root: {
         display: 'flex',
+        backgroundColor: '#e9ebee',
     },
     gridContainer: {
     flexGrow: 1 ,
+    height: '90vh',
   },
-    readContainer: {
-        height: '400px,'
-    },
+  
     fillAppBarSpace: theme.mixins.toolbar,
+    bannerSpace: {
+        height:'150px',
+        borderStyle: 'solid'},
+    footerSpace: {
+        minHeight:'11vh',
+        borderStyle: 'solid'},
 });
 
 const defaultNotice = {
             from: {text :'notice@TemporyEmail'},
-            text: 'click an email to view'} 
+            subject: 'Welcome to temp mail',
+            text: 'Select an email from inbox to view'} 
+const deleteNotice = {
+            from: {text :'notice@TemporyEmail'},
+            subject: 'Email Deleted',
+            text: 'Email deleted. \nSelect an email from inbox to view'}
 
 class EmailViewer extends React.Component {
     
@@ -57,7 +68,7 @@ class EmailViewer extends React.Component {
   }
 
   deleteEmail(index){
-      this.setState({currentEmail: defaultNotice,
+      this.setState({currentEmail: deleteNotice,
                      emailsRecieved: this.state.emailsReceived.splice(index,1)})
   }
 
@@ -75,7 +86,10 @@ class EmailViewer extends React.Component {
         <CssBaseline />
         <TopAppBar />
         <Grid container className={classes.gridContainer}>
-            <Grid item xs={2} />
+            <Grid item xs={12} className={classes.fillAppBarSpace}/>
+            <Grid item xs={12} className={classes.bannerSpace}>
+            banner goes here
+            </Grid>
             <Grid item xs={2} >
             <InboxSidebar
                 container={this.containerRef}
@@ -85,11 +99,14 @@ class EmailViewer extends React.Component {
              
             /> 
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
             <EmailBody
                 currentEmail={this.state.currentEmail}
             />
             </Grid>
+            <Grid item xs={12} className={classes.footerSpace}>
+            footer stuff goes here
+            </Grid>    
         </Grid>
       </div>
     );

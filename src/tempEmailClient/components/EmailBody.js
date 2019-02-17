@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 const drawerWidth = 270;
 const drawerMaxWidth = '40%';
@@ -10,21 +11,23 @@ const styles = theme => ({
   root: {
     display: 'flex',
   },
-  fillAppBarSpace : theme.mixins.toolbar,
   content: {
     whiteSpace:'pre',
     flexGrow: 1,
     marginLeft: 0,
   },
-    emailContainer: {
-         borderWidth: '1px',
-        borderStyle: 'solid',
-        height: '50vh',
+   
+    emailPaper: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+        minHeight: '50vh',
+        marginRight: '10px'
     },
     fromField: {
-        ...theme.mixins.listItemText,
-        borderWidth: '0px 0px 1px 0px',
-        borderStyle: 'solid'
+        backgroundColor: '#eedcaa',
+        borderRadius: '0px 15px 15px 0px',
+        ...theme.mixins.gutters(),
     }
 });
 
@@ -36,21 +39,20 @@ class EmailBody extends React.Component {
 
 	return (
         <main className={classes.content}>
-            <div className={classes.fillAppBarSpace} />
-            <div className={classes.fillAppBarSpace} />
-            <div className={classes.fillAppBarSpace} />
             <div className={classes.emailContainer}>
                 <div className={classes.fromField} >
                     <Typography noWrap={true} variant='h6'>
-                        {'From: ' + this.props.currentEmail.from.text} 
+                        {this.props.currentEmail.from.text} 
                     </Typography>
                     <Typography noWrap={true} variant='subtitle2'>
-                        {'Subject: ' + this.props.currentEmail.from.text} 
+                        {this.props.currentEmail.subject} 
                     </Typography>
                 </div>
-                <Typography paragraph>
-                {this.props.currentEmail.text} 
-                </Typography>
+                <Paper className={classes.emailPaper}>
+                    <Typography paragraph>
+                    {this.props.currentEmail.text} 
+                    </Typography>
+                </Paper>
             </div>
         </main>
 

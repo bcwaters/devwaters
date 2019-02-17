@@ -16,10 +16,17 @@ const styles = theme => ({
         flex:'1 1 auto', 
         padding: '0px', 
         minWidth:'0px'},
+    listItem:{
+        backgroundColor: 'lightgoldenrodyellow',
+        borderBottomWidth: '1px',
+        borderBottomStyle: 'solid',
+        borderRadius: '0px 0px 15px 15px'
+        
+    },
     listBorder:{
-        borderWidth: '1px 0px 1px 1px',
+        borderRadius: '0px 0px 15px 15px',
+        borderWidth: '1px 1px 0px 1px',
         borderStyle: 'solid',
-        height: '50vh',
         padding: '0px',
     },
     inboxIcon:{
@@ -28,12 +35,8 @@ const styles = theme => ({
     deleteIcon:{
         color: 'DarkRed',
         '&:hover': { color: 'red'}},
-    fillAppBarSpace: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0px',
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+    myAddressBox: {
+        backgroundColor: '#008000b0',
   },
       emailText:{
         textOverflow: 'clip',
@@ -42,6 +45,7 @@ const styles = theme => ({
     }
 });
 
+//considering changing this into drop down menu
 class InboxSidebar extends React.Component {
 	
 	render()
@@ -52,22 +56,28 @@ class InboxSidebar extends React.Component {
     //TODO update the css for the from field
 	return (
         <React.Fragment>
-            <div className={classes.fillAppBarSpace}/>
-            <div className={classes.fillAppBarSpace}> 
-                'Send an email to test@devwaters.com for your viewing pleasure.'
-            </div>
-            <div className={classes.fillAppBarSpace}/>
-      
+        <div className={classes.myAddressBox}> 
+            <ListItem>
+            <ListItemText
+                    primary={'test@devwaters.com'}
+                    secondary={ 'change receiving address? [link]'} />
+            </ListItem>  
+        </div>
+        
 		  <List className={classes.listBorder}>
-                 <ListItem style={{ borderWidth: '0px 0px 1px 0px', 
+                 <ListItem style={{ zIndex: '1',
+                                    boxShadow: '0px 2px grey',
+                                    backgroundColor: 'palegoldenrod',
+                                    borderWidth: '0px 0px 1px 0px', 
                                     borderStyle: 'solid'}}>
                     <ListItemText primary='Inbox'/>
                 </ListItem>
             {  this.props.emailsReceived.length ==0 ?  
-                <ListItem><ListItemText primary='no emails received'/></ListItem>
+                <ListItem className={classes.listItem}><ListItemText primary='inbox empty'/></ListItem>
               :
                 this.props.emailsReceived.map((mailObject, index) => (
                 <ListItem button key={index} 
+                    className={classes.listItem}
                     onClick={()=>this.props.setEmailToView(mailObject)}>
                  <CssBaseline />
                 <ListItemText

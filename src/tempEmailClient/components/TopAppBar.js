@@ -7,9 +7,6 @@ import Typography from '@material-ui/core/Typography';
 
 //zIndex put appbar priority above drawer 
 const styles = theme => ({
-   appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        },
     root: {
            flexGrow: '1',
     }
@@ -23,18 +20,13 @@ class TopAppBar extends React.Component {
 	const { classes } = this.props;
 
 	return (
-            
-            <AppBar 
-                    className={classes.appBar}
-            >
-                <Toolbar disableGutters={false}>
+            <AppBar>
+                <Toolbar>
                     <Typography variant="h6" color="inherit" noWrap>
                     Temp Email Viewer
                     </Typography>
                 </Toolbar>
             </AppBar>
-            
-        
         );
 	}
 }
