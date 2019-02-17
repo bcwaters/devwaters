@@ -42,6 +42,9 @@ const styles = theme => ({
         textOverflow: 'clip',
         whiteSpace: 'nowrap',
         overflow: 'hidden'
+    },
+    root:{
+        paddingLeft: '10px' 
     }
 });
 
@@ -55,12 +58,12 @@ class InboxSidebar extends React.Component {
     // for every email in prop create inbox icon, from field, and delete icon
     //TODO update the css for the from field
 	return (
-        <React.Fragment>
+        <div className={classes.root}>
         <div className={classes.myAddressBox}> 
-            <ListItem>
+            <ListItem style={{ textAlign: 'right'}}>
             <ListItemText
                     primary={'test@devwaters.com'}
-                    secondary={ 'change receiving address? [link]'} />
+                    secondary={ '[change]'} />
             </ListItem>  
         </div>
         
@@ -74,8 +77,9 @@ class InboxSidebar extends React.Component {
                 </ListItem>
             {  this.props.emailsReceived.length ==0 ?  
                 <ListItem className={classes.listItem}><ListItemText primary='inbox empty'/></ListItem>
-              :
+              : 
                 this.props.emailsReceived.map((mailObject, index) => (
+                
                 <ListItem button key={index} 
                     className={classes.listItem}
                     onClick={()=>this.props.setEmailToView(mailObject)}>
@@ -105,10 +109,12 @@ class InboxSidebar extends React.Component {
             ))}
             </List>
       
-        </React.Fragment>
+        </div>
         );
 	}
 }
+
+function log(thing){console.log(thing)}
 
 InboxSidebar.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import InboxSidebar from './InboxSidebar.js'
 import TopAppBar from './TopAppBar.js'
 import EmailBody from './EmailBody.js'
+import Notices from './res/notices.js'
 
 const styles = theme => ({
     root: {
@@ -14,10 +15,9 @@ const styles = theme => ({
         backgroundColor: '#e9ebee',
     },
     gridContainer: {
-    flexGrow: 1 ,
-    height: '90vh',
-  },
-  
+        flexGrow: 1 ,
+        height: '90vh',
+    },
     fillAppBarSpace: theme.mixins.toolbar,
     bannerSpace: {
         height:'150px',
@@ -27,20 +27,12 @@ const styles = theme => ({
         borderStyle: 'solid'},
 });
 
-const defaultNotice = {
-            from: {text :'notice@TemporyEmail'},
-            subject: 'Welcome to temp mail',
-            text: 'Select an email from inbox to view'} 
-const deleteNotice = {
-            from: {text :'notice@TemporyEmail'},
-            subject: 'Email Deleted',
-            text: 'Email deleted. \nSelect an email from inbox to view'}
 
 class EmailViewer extends React.Component {
     
     state = {
     emailsReceived: [],  //array of mailobjects
-    currentEmail: defaultNotice//current mailObject
+    currentEmail: Notices.welcomeNotice//current mailObject
   };
 
   constructor(props, context) {
@@ -56,11 +48,17 @@ class EmailViewer extends React.Component {
   componentDidMount() {
       //this directs the socket data to a component function
       this.props.registerHandler(this.onEmailReceived)
+      //add timer that sends a notice email to user after 3 seconds
+      setTimeout(() => {
+            this.addEmailToView(Notices.defaultNotice)
+            },
+                4 * 1000
+        );
     }
 
   //triggered when socket notifies of a new email
   onEmailReceived(socketData){    
-      this.addMessageToView( socketData.email)
+      this.addEmailToView( socketData.email)
     }
 
   updateCurrentEmail(currentEmail){
@@ -68,13 +66,13 @@ class EmailViewer extends React.Component {
   }
 
   deleteEmail(index){
-      this.setState({currentEmail: deleteNotice,
+      this.setState({currentEmail: Notices.deleteNotice,
                      emailsRecieved: this.state.emailsReceived.splice(index,1)})
   }
 
-  addMessageToView(msg){
+  addEmailToView(mailObject){
       this.setState({
-            emailsReceived: [...this.state.emailsReceived, msg]
+            emailsReceived: [...this.state.emailsReceived, mailObject]
         })
   }
 

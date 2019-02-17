@@ -22,13 +22,19 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         minHeight: '50vh',
-        marginRight: '10px'
+        maxWidth: '100%',
+        marginRight: '10px',
+        overflow: 'auto'
+    },
+    htmlContent: {
+        maxHeight: '100%',
+        overflow: 'auto'
     },
     fromField: {
         backgroundColor: '#eedcaa',
         borderRadius: '0px 15px 15px 0px',
         ...theme.mixins.gutters(),
-    }
+    },
 });
 
 class EmailBody extends React.Component {
@@ -49,9 +55,22 @@ class EmailBody extends React.Component {
                     </Typography>
                 </div>
                 <Paper className={classes.emailPaper}>
-                    <Typography paragraph>
-                    {this.props.currentEmail.text} 
-                    </Typography>
+                    {this.props.currentEmail.html ?
+                        <iframe 
+                            srcdoc={this.props.currentEmail.html}
+                            style= {{
+                                    flexGrow: '1',
+                                    width:'100%',
+                                    minHeight:'50vh'}}
+                        />
+                    :
+                        <Typography paragraph>
+                        {this.props.currentEmail.text} 
+                        </Typography>
+                         }
+                         
+                        
+                   
                 </Paper>
             </div>
         </main>

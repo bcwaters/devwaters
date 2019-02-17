@@ -38,7 +38,7 @@ server.listen(3000);
 EmailWatcher.onNewEmail(
     //upon new email use io to emit data to client                   
     (socketServer, newEmail) => 
-    {socketServer.emit('email', { email: newEmail } )}, io)
+    {socketServer.emit('email', { email: mailObject } )}, io)
 
 app.listen(PORT, () => {
   console.log(`SSR running on port ${PORT}`)
