@@ -10,6 +10,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
+import Link from '@material-ui/core/Link';
+import ChangeAddressBox from './ChangeAddressBox.js'
 
 const styles = theme => ({
     fromText: {
@@ -41,6 +43,7 @@ const styles = theme => ({
     donationBox: {
         marginTop: '20px',
         backgroundColor: 'pink',
+        borderRadius: '10px 0px 0px 10px'
   },
       emailText:{
         textOverflow: 'clip',
@@ -63,15 +66,13 @@ class InboxSidebar extends React.Component {
     //TODO update the css for the from field
 	return (
         <div className={classes.root}>
-        <div className={classes.myAddressBox}> 
-            <ListItem style={{ textAlign: 'right'}}>
-            <ListItemText
-                    primary={'test@devwaters.com'}
-                    secondary={ '[change]'} />
-            </ListItem>  
-        </div>
-        
-		  <List className={classes.listBorder}>
+          
+            <ChangeAddressBox
+                myAddress={this.props.myAddress}
+                updateMyAddress={this.props.updateMyAddress}
+            />
+		  
+            <List className={classes.listBorder}>
                  <ListItem style={{ zIndex: '1',
                                     boxShadow: '0px 2px grey',
                                     backgroundColor: 'palegoldenrod',
@@ -113,10 +114,11 @@ class InboxSidebar extends React.Component {
             ))}
             </List> 
             <div className={classes.donationBox}> 
-                <ListItem style={{ textAlign: 'right'}}>
-                    <ListItemText
-                        primary={'I will beg for donations here'}
-                        secondary={ '[donate]'} />
+                <ListItem button style={{ textAlign: 'right'}}>
+                    <ListItemText 
+                        primary={'Donate to TempMail'}
+                        secondary={<Link>[donate]</Link>} 
+                    />
                 </ListItem>  
             </div>
         </div>

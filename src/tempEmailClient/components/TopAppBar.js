@@ -20,9 +20,9 @@ class TopAppBar extends React.Component {
 	const { classes } = this.props;
 
 	return (
-            <AppBar>
+            <AppBar position='absolute' style={{ backgroundColor: 'transparent'}}>
                 <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap>
+                    <Typography variant="h6" color='textPrimary' noWrap>
                     Temp Email Viewer
                     </Typography>
                 </Toolbar>

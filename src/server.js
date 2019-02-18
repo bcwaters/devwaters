@@ -31,14 +31,22 @@ app.use(router)
 //Set up socket io
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-io.on('connection', () => { console.log('socketConnected') });
+
 server.listen(3000);
+
+
+io.on('connection', function(socket){
+    socket.on('newAddress', (addressData) => {console.log('new email:' + addressData)})
+});
 
 //Link socket to filewatcher event
 EmailWatcher.onNewEmail(
     //upon new email use io to emit data to client                   
     (socketServer, mailObject) => 
     {socketServer.emit('email', { email: mailObject } )}, io)
+
+
+
 
 app.listen(PORT, () => {
   console.log(`SSR running on port ${PORT}`)

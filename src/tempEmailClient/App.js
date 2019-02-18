@@ -15,7 +15,10 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <EmailView registerHandler={(handleEmailFunction) => this.state.clientsideSocket.registerNewEmailHandler(handleEmailFunction)}/>
+        <EmailView 
+            registerHandler={(handleEmailFunction) => this.state.clientsideSocket.registerNewEmailHandler(handleEmailFunction)}
+            setMyAddress={(newAddress) => this.state.clientsideSocket.setMyAddress(newAddress)}
+        />
       </React.Fragment>
     );
   }

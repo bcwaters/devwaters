@@ -7,8 +7,9 @@ import Grid from '@material-ui/core/Grid';
 import InboxSidebar from './InboxSidebar.js'
 import TopAppBar from './TopAppBar.js'
 import EmailBody from './EmailBody.js'
-import Notices from './res/notices.js'
+import NotifierSystem from './res/notices.js'
 
+const Notifier = new NotifierSystem() 
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -18,7 +19,10 @@ const styles = theme => ({
         flexGrow: 1 ,
         height: '95vh',
     },
-    fillAppBarSpace: theme.mixins.toolbar,
+    fillAppBarSpace: {
+        ...theme.mixins.toolbar,
+        backgroundColor: '#5555'
+        },
     bannerSpace: {
         height:'150px',
         borderStyle: 'solid'},
@@ -33,8 +37,9 @@ const styles = theme => ({
 class EmailViewer extends React.Component {
     
     state = {
-    emailsReceived: [],  //array of mailobjects
-    currentEmail: Notices.welcomeNotice//current mailObject
+        emailsReceived: [],  //array of mailobjects
+        currentEmail: Notifier.getNotice('welcomeNotice'),//current mailObject
+        myAddress: 'test@devwaters.com'  //users current email address
   };
 
   constructor(props, context) {
@@ -43,6 +48,7 @@ class EmailViewer extends React.Component {
         this.ContainerRef = React.createRef();
         this.onEmailReceived = this.onEmailReceived.bind(this)
         this.updateCurrentEmail = this.updateCurrentEmail.bind(this)
+        this.updateMyAddress = this.updateMyAddress.bind(this)
         this.deleteEmail = this.deleteEmail.bind(this)
     
   }
@@ -52,12 +58,12 @@ class EmailViewer extends React.Component {
       this.props.registerHandler(this.onEmailReceived)
       //add timer that sends a notice email to user after 3 seconds
       setTimeout(() => {
-            this.addEmailToView(Notices.defaultNotice)
+            this.addEmailToView(Notifier.getNotice('defaultNotice'))
             },
                 4 * 1000
         );
        setTimeout(() => {
-            this.addEmailToView(Notices.supportNotice)
+            this.addEmailToView(Notifier.getNotice('supportNotice'))
             },
                 15 * 1000
         );
@@ -72,8 +78,16 @@ class EmailViewer extends React.Component {
       this.setState({currentEmail: currentEmail})
   }
 
+  updateMyAddress(newAddress){
+      //emit new address over socket
+      this.props.setMyAddress(newAddress)
+      //update state
+      this.setState({   currentEmail: Notifier.updateAddressNotice(newAddress),
+                        myAddress: newAddress})
+  }
+
   deleteEmail(index){
-      this.setState({currentEmail: Notices.deleteNotice,
+      this.setState({currentEmail: Notifier.getNotice('deleteNotice'),
                      emailsRecieved: this.state.emailsReceived.splice(index,1)})
   }
 
@@ -98,7 +112,8 @@ class EmailViewer extends React.Component {
                 emailsReceived={this.state.emailsReceived} 
                 setEmailToView={this.updateCurrentEmail} 
                 deleteEmail={this.deleteEmail}
-             
+                myAddress={this.state.myAddress}
+                updateMyAddress={this.updateMyAddress}
             /> 
             </Grid>
             <Grid item xs={7}>
