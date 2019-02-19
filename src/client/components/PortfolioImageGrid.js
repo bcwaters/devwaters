@@ -18,8 +18,10 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 450,
+   flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+    
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -34,9 +36,8 @@ class TitlebarGridList extends React.Component {
 
 	return (
 		<div className={classes.root}>
-		<GridList cellHeight={180} className={classes.gridList}>
-			<GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-			</GridListTile>
+        <GridList cols={1} style={{minHeight: '30vh', width:'100%'}}/>
+		<GridList cols={3} className={classes.gridList} spacing={40}>
 			{tileData.map(tile => (
 				<GridListTile key={tile.img}>
 					<img src={tile.img} alt={tile.title} />
@@ -52,6 +53,7 @@ class TitlebarGridList extends React.Component {
           </GridListTile>
         ))}
       </GridList>
+ <GridList cols={1} style={{minHeight: '30vh', width:'100%'}}/>
     </div>
   );
 	}

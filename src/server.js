@@ -1,21 +1,14 @@
 import express from 'express'
-import FileWatcher from './fileWatcher.js'
 import serverRenderer from './serverRenderer.js'
-import tempEmailRenderer from './tempEmailRenderer.js'
 
-const PORT = 8080
+const PORT = 8082
 const app = express()
-const EmailWatcher = new FileWatcher()
-
-
 
 const router = express.Router()
 //route for main app ^/$ is regular expression for end of string
 router.use('^/$', serverRenderer)
 
-
 //Create simple react app for real time viewing of emails
-router.use('/tempEmail', tempEmailRenderer)
 router.use(
   express.static('dist', { maxAge: '30d' })
 )
@@ -32,22 +25,7 @@ app.use(router)
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-server.listen(3000);
-
-
-io.on('connection', function(socket){
-    socket.on('newAddress', (addressData) => {console.log('new email:' + addressData)})
-});
-
-//Link socket to filewatcher event
-EmailWatcher.onNewEmail(
-    //upon new email use io to emit data to client                   
-    (socketServer, mailObject) => 
-    {socketServer.emit('email', { email: mailObject } )}, io)
-
-
-
-
+//server.listen(3000);
 app.listen(PORT, () => {
   console.log(`SSR running on port ${PORT}`)
   console.log(__dirname)

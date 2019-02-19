@@ -41,19 +41,22 @@ function TopAppBar(props) {
           <Link component={AboutLink}variant="h6" color="inherit" className={classes.navLink}>
             Home
           </Link>
-		   <Link component={PortfolioLink} variant="h6" color="inherit" className={classes.navLink}>
-            Portfolio
+		   <Link component={PortfolioLink} variant="h6" color="inherit" className={classes.grow}>
+            Projects
           </Link>
-		  <Link component={ArticleLink} variant="h6" color="inherit" className={classes.grow}>
-            Articles
-          </Link>
+		 
 		  <Button color="inherit">Client Login</Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+/*
+ <Link component={ArticleLink} variant="h6" color="inherit" className={classes.grow}>
+            Articles
+          </Link>
 
+*/
 TopAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };

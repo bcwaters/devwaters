@@ -22,7 +22,7 @@ const styles = {
 	top: 'auto'
   },
 };
-
+// <BottomNavigationAction label="Chat with me" icon={<ChatIcon />} />
 class SimpleBottomNavigation extends React.Component {
   state = {
     value: 0,
@@ -47,7 +47,7 @@ class SimpleBottomNavigation extends React.Component {
 			href="http://www.github.com/bcwaters" target="_blank"
 			label="My Github" 
 			icon={<GitIcon />} />
-        <BottomNavigationAction label="Chat with me" icon={<ChatIcon />} />
+       
         
       </BottomNavigation>
     );
