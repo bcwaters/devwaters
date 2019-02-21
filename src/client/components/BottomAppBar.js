@@ -48,7 +48,6 @@ class SimpleBottomNavigation extends React.Component {
 			label="My Github" 
 			icon={<GitIcon />} />
        
-        
       </BottomNavigation>
     );
   }
