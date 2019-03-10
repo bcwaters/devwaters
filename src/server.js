@@ -5,6 +5,18 @@ import MongoDB from './mongoDB.js'
 const PORT = 8082
 const app = express()
 
+
+//
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
+
 const router = express.Router()
 //route for main app ^/$ is regular expression for end of string
 router.use('^/$', serverRenderer)
@@ -25,6 +37,7 @@ router.get('*', function(req, res) {
 });
 
 // tell the app to use the above rules
+app.use(allowCrossDomain)
 app.use(router)
 
 //Set up socket io
