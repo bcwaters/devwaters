@@ -39,7 +39,6 @@ class TitlebarGridList extends React.Component {
         <GridList cols={1} style={{minHeight: '30vh', width:'100%'}}/>
 		<GridList cols={3} className={classes.gridList} spacing={40}>
 			{tileData.map(tile => (
-            
 				<GridListTile component="a" href={tile.href} key={tile.img}>
 					<img src={tile.img} alt={tile.title} />
 					<GridListTileBar

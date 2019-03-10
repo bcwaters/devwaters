@@ -1,5 +1,6 @@
 import express from 'express'
 import serverRenderer from './serverRenderer.js'
+import MongoDB from './MongoDB.js'
 
 const PORT = 8082
 const app = express()
@@ -12,6 +13,16 @@ router.use('^/$', serverRenderer)
 router.use(
   express.static('dist', { maxAge: '30d' })
 )
+router.get('/api/callMongo', (req, res) => {
+    //call DB and send data
+    MongoDB.getComments('somewhere.com', (result)=>{res.json(result)})
+})
+
+
+MongoDB.createCollection('comments')
+MongoDB.insertComment({text: 'This is a comment that has been inserted into the mongoDB. it was the first comment to be inserted.'})
+MongoDB.insertComment({text: 'This is another comment. 2nd one inserted'})
+MongoDB.insertComment({text: 'This is the 3rd comment. Adding filler to make it longer\n\n\n\n\n\alsdfladksf;akjsdf;lakjsdf;lasdf fadsjladfkjs;asdkfj;asfdas'})
 
 //If no route exist reroute to homepage
 router.get('*', function(req, res) {
