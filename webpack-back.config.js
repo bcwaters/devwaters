@@ -1,6 +1,14 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
+    plugins: [
+    new CopyPlugin([
+      { from: './universalCommentChromeExtension-beta.zip', to: './universalCommentChromeExtension-beta.zip' },
+    
+    ]),
+  ],
   target: "node",
   entry: {
     app: ["./src/server.js"]

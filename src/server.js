@@ -34,6 +34,10 @@ router.get('/api/getComments', (req, res) => {
     MongoDB.getComments('somewhere.com', (result)=>{res.json(result)})
 })
 
+app.get('/download/universalCommentExtension.zip', function(req, res){
+  var file = __dirname + '/universalCommentChromeExtension-beta.zip';
+  res.download(file); // Set disposition and send it.
+});
 
 /**
 *   post a comment to the rest server
