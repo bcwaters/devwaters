@@ -1,9 +1,11 @@
 import express from 'express'
 import serverRenderer from './serverRenderer.js'
 import MongoDB from './mongoDB.js'
+MongoDB.setTestCollection();
 
 const PORT = 8082
 const app = express()
+app.use(express.json())
 
 
 //
@@ -25,9 +27,30 @@ router.use('^/$', serverRenderer)
 router.use(
   express.static('dist', { maxAge: '30d' })
 )
-router.get('/api/callMongo', (req, res) => {
+
+
+router.get('/api/getComments', (req, res) => {
     //call DB and send data
     MongoDB.getComments('somewhere.com', (result)=>{res.json(result)})
+})
+
+
+/**
+*   post a comment to the rest server
+*   the post data is formatted in json
+*   ex: {  originUrl : 'url_to_leave_comment_on.com',
+*            comment : { user: 'bob', text:'coment text', commentAge: TimeCommentMade }
+*        }
+*       MongoDB.insertComment(post.data.originUrl, post.data.comment)  //url is collectionName
+*
+*/
+router.post('/api/addComment', (req, res) => {
+   
+    //req.on('data', function(data) {
+       MongoDB.insertComment(req.body, 'comments')
+        //console.log(req.body)
+         res.end();
+   // })  
 })
 
 
